@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -6,7 +6,6 @@ import Animated, {
   withSequence,
   withTiming,
   useSharedValue,
-  useEffect,
 } from 'react-native-reanimated';
 import { Animal as AnimalType } from '../../types';
 import { ANIMAL_CONFIGS } from '../../constants/animals';

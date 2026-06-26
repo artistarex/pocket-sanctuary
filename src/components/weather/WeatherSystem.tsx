@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   withTiming,
-  interpolateColor,
   useSharedValue,
-  useEffect,
 } from 'react-native-reanimated';
 import { RainEffect } from './RainEffect';
 import { SnowEffect } from './SnowEffect';

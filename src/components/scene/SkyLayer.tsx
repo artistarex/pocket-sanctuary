@@ -1,15 +1,28 @@
-import React, { useEffect } from 'react';
-import { useWindowDimensions, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useWindowDimensions, StyleSheet, View, Platform } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  interpolate,
-  Extrapolation,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
 import { TimeOfDay } from '../../types';
 import { SKY_COLORS } from '../../constants/colors';
+
+// Web-safe gradient wrapper
+function SkyGradient({ topColor, bottomColor, children, style }: {
+  topColor: string; bottomColor: string; children: React.ReactNode; style: object;
+}) {
+  if (Platform.OS === 'web') {
+    return (
+      <View style={[style, { background: `linear-gradient(180deg, ${topColor} 0%, ${bottomColor} 100%)` } as any]}>
+        {children}
+      </View>
+    );
+  }
+  // Lazy import on native to avoid web bundle issues
+  const { LinearGradient } = require('expo-linear-gradient');
+  return <LinearGradient colors={[topColor, bottomColor]} style={style}>{children}</LinearGradient>;
+}
 
 interface Props {
   timeOfDay: TimeOfDay;
@@ -42,8 +55,9 @@ export function SkyLayer({ timeOfDay, dayProgress }: Props) {
   const starStyle = useAnimatedStyle(() => ({ opacity: starOpacity.value }));
 
   return (
-    <LinearGradient
-      colors={[colors.top, colors.bottom]}
+    <SkyGradient
+      topColor={colors.top}
+      bottomColor={colors.bottom}
       style={[StyleSheet.absoluteFill, { zIndex: 0 }]}
     >
       {/* Stars */}
@@ -73,7 +87,7 @@ export function SkyLayer({ timeOfDay, dayProgress }: Props) {
       <Animated.View style={[styles.celestialBody, { right: width * 0.25 }, moonStyle]} pointerEvents="none">
         <Animated.View style={styles.moon} />
       </Animated.View>
-    </LinearGradient>
+    </SkyGradient>
   );
 }
 
