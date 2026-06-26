@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Pocket Sanctuary",
+    "slug": "pocket-sanctuary",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a2e1a"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.pocketsanctuary.app",
+      "infoPlist": {
+        "NSMotionUsageDescription": "Used for gentle device tilt effects in the sanctuary."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1a2e1a"
+      },
+      "package": "com.pocketsanctuary.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-av"
+    ],
+    "scheme": "pocketsanctuary",
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
